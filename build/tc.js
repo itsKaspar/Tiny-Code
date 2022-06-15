@@ -30168,6 +30168,7 @@
     constructor(code, layout = "side"){
       this.layout = this.hasLayout() || layout;
       this.code = this.hasHashCode() || code;
+      let context = this;
       this.editor = new EditorView({
         state: EditorState.create({
           doc: this.code,
@@ -30177,7 +30178,10 @@
             nord,
             EditorView.updateListener.of(function (v) {
                 if (v.docChanged) {
-                    updatePreview();
+                  let sketch = document.querySelector("#p5");
+                  if(sketch) { sketch.remove(); } // # Delete old iframe
+                  let code = context.editor.state.doc.toString(); // # Get changes
+                  createIframe(code); // # Create New Iframe
                 }
             }),
         ]
@@ -30185,7 +30189,7 @@
         parent: document.getElementById("editor")
       });
 
-      this.createIframe(this.editor.state.doc.toString()); // write in iframe (interpreted code)
+      createIframe(this.editor.state.doc.toString()); // write in iframe (interpreted code)
       this.setLayout(); // change/add the css of <style id="pageStyle"></style>
     }
 
@@ -30206,38 +30210,6 @@
       const urlParams = new URLSearchParams(queryString); // get url parameters
       return urlParams.get('layout');
     }
-
-    updatePreview(){
-          let sketch = document.querySelector("#p5");
-          if(sketch) { sketch.remove(); } // # Delete old iframe
-          let code = this.editor.state.doc.toString(); // # Get changes
-          this.createIframe(code); // # Create New Iframe
-    }
-
-    createIframe(code){
-        let iframe = document.createElement('iframe');
-        iframe.setAttribute("id", "p5"); // set its id to p5
-        iframe.setAttribute("scrolling", "no");
-        document.body.appendChild(iframe);
-        let html =  `<!DOCTYPE html>
-                    <html>
-                      <head>
-                        <script src="./lib/p5.min.js"><\/script>
-                        <style>*{margin:0;padding:0;border:0;box-sizing: border-box;overflow:hidden;}</style>
-                      </head>
-                      <body>
-                        <script>
-                          ${code}
-                          function windowResized(){resizeCanvas(windowWidth, windowHeight);}
-                        <\/script>
-                      </body>
-                    </html>`;
-
-        iframe = iframe.contentWindow || iframe.contentDocument.document || iframe.contentDocument;
-        iframe.document.open();
-        iframe.document.write(html);
-        iframe.document.close();
-      }
 
       setLayout(){
         const pageStyle = document.getElementsByTagName("style")[0];
@@ -30268,6 +30240,32 @@
     }
 
   }
+
+  function createIframe(code){
+        let iframe = document.createElement('iframe');
+        iframe.setAttribute("id", "p5"); // set its id to p5
+        iframe.setAttribute("scrolling", "no");
+        document.body.appendChild(iframe);
+        let html =  `<!DOCTYPE html>
+                    <html>
+                      <head>
+                        <script src="./lib/p5.min.js"><\/script>
+                        <style>*{margin:0;padding:0;border:0;box-sizing: border-box;overflow:hidden;}</style>
+                      </head>
+                      <body>
+                        <script>
+                          ${code}
+                          function windowResized(){resizeCanvas(windowWidth, windowHeight);}
+                        <\/script>
+                      </body>
+                    </html>`;
+
+        iframe = iframe.contentWindow || iframe.contentDocument.document || iframe.contentDocument;
+        iframe.document.open();
+        iframe.document.write(html);
+        iframe.document.close();
+      }
+
 
   if(typeof window !== 'undefined') window.TinyCode = TinyCode; // would change Q to the name of the library
   else module.exports = TinyCode; // in node would create a context
