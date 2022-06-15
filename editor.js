@@ -26,7 +26,7 @@ class TinyCode{
           nord,
           EditorView.updateListener.of(function (v) {
               if (v.docChanged) {
-                  updatePreview();
+                  this.updatePreview();
               }
           }),
       ]
