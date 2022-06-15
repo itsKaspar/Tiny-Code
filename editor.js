@@ -14,9 +14,12 @@ import { tags } from "@lezer/highlight"
 import { defaultHighlightStyle, HighlightStyle, syntaxHighlighting } from "@codemirror/language";
 
 class TinyCode{
+
   constructor(code, layout = "side"){
+
     this.layout = this.hasLayout() || layout;
     this.code = this.hasHashCode() || code;
+
     this.editor = new EditorView({
       state: EditorState.create({
         doc: this.code,
