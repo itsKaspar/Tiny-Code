@@ -30215,12 +30215,12 @@
         const pageStyle = document.getElementsByTagName("style")[0];
 
         // # Define different style
-        let cssSide = `.CodeMirror{ height:98%;width:48%;left:1%;top:1%;} #p5{ left:50%;top:0;height:100%;width:50%; }`;
-        let cssTop = `.CodeMirror{ width:98%;height:48%; } #p5{ top:50%;border:0;width:100%;height:50%;}`;
-        let cssBot = `.CodeMirror{width:100%;height:50%;}#p5{border:0;}.CodeMirror{top:50%;}`;
-        let cssCode = `.CodeMirror{width:100%;height:100%;}#p5 {display:none;}`;
-        let cssVisual = `.CodeMirror{width:100%;height:100%;}.CodeMirror {display:none;}`;
-        let cssOverlay = `.CodeMirror{width:100%;height:100%;top0;left:0}`;
+        let cssSide = `.cm-editor{ height:100%;width:50%;left:0%;top:0%;} #p5{ left:50%;top:0;height:100%;width:50%; }`;
+        let cssTop = `.cm-editor{ width:100%;height:50%; } #p5{ top:50%;border:0;width:100%;height:50%;}`;
+        let cssBot = `.cm-editor{width:100%;height:50%;}#p5{border:0;}.cm-editor{top:50%;}`;
+        let cssCode = `.cm-editor{width:100%;height:100%;}#p5 {display:none;}`;
+        let cssVisual = `.cm-editor{width:100%;height:100%;}.cm-editor {display:none;}`;
+        let cssOverlay = `.cm-editor{width:100%;height:100%;top0;left:0}`;
 
 
         switch(this.layout){
