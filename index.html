@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="./css/style.css">
+
+    <style id="layoutStyle"></style>
+
+</head>
+
+<body>
+  <div id="editor"></div>
+
+</body>
+
+    <script src="./build/tc.js"></script>
+    <script>
+
+      const DEFAULT_CODE =
+        `function setup(){
+        createCanvas(windowWidth,windowHeight);
+        }
+
+        function draw(){
+        background('#e5e9f0');
+        }`;
+
+
+      let editor = new TinyCode(DEFAULT_CODE, "side");
+    </script>
+</html>
