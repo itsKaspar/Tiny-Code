@@ -64,12 +64,12 @@ class TinyCode{
       const pageStyle = document.getElementsByTagName("style")[0];
 
       // # Define different style
-      let cssSide = `.cm-editor{ height:100%;width:50%;left:0%;top:0%;} #p5{ left:50%;top:0;height:100%;width:50%; }`;
-      let cssTop = `.cm-editor{ width:100%;height:50%; } #p5{ top:50%;border:0;width:100%;height:50%;}`;
-      let cssBot = `.cm-editor{width:100%;height:50%;}#p5{border:0;}.cm-editor{top:50%;}`;
-      let cssCode = `.cm-editor{width:100%;height:100%;}#p5 {display:none;}`;
-      let cssVisual = `.cm-editor{width:100%;height:100%;}.cm-editor {display:none;}`;
-      let cssOverlay = `.cm-editor{width:100%;height:100%;top0;left:0}`;
+      let cssSide = `.editor{ height:100%;width:50%;left:0%;top:0%;} #p5{ left:50%;top:0;height:100%;width:50%; }`;
+      let cssTop = `.editor{ width:100%;height:50%; } #p5{ top:50%;border:0;width:100%;height:50%;}`;
+      let cssBot = `.editor{width:100%;height:50%;}#p5{border:0;}.editor{top:50%;}`;
+      let cssCode = `.editor{width:100%;height:100%;}#p5 {display:none;}`;
+      let cssVisual = `.editor{width:100%;height:100%;}.editor {display:none;}`;
+      let cssOverlay = `.editor{width:100%;height:100%;top0;left:0}`;
 
 
       switch(this.layout){

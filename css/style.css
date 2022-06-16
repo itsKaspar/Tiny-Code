@@ -16,7 +16,8 @@ html, body{
 .cm-editor.cm-focused { outline: 2px solid cyan } */
 
 
-.cm-editor{
+.editor{
+  border:3px solid blue;
   /* font-size:0.9em; */
   /* background-color:#f5f3f2; */
   /* border-radius:10px;
@@ -25,10 +26,10 @@ html, body{
  */
 }
 #p5{
-  border:0;
+  border:3px solid cyan;
 }
 
-.cm-editor, #p5{
+.editor, #p5{
   position:absolute;
 }
 
