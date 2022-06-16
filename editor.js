@@ -16,6 +16,8 @@ import { defaultHighlightStyle, HighlightStyle, syntaxHighlighting } from "@code
 class TinyCode{
   constructor(code, layout = "side"){
     this.layout = this.hasLayout() || layout;
+    this.setLayout(); // change/add the css of <style id="pageStyle"></style>
+    
     this.code = this.hasHashCode() || code;
     let context = this;
     this.editor = new EditorView({
@@ -39,7 +41,6 @@ class TinyCode{
     });
 
     this.createIframe(this.editor.state.doc.toString()); // write in iframe (interpreted code)
-    this.setLayout(); // change/add the css of <style id="pageStyle"></style>
   }
 
   hasHashCode(){
