@@ -61,7 +61,7 @@ class TinyCode{
     return urlParams.get('layout');
   }
 
-    setLayout(){
+  setLayout(){
       const pageStyle = document.getElementsByTagName("style")[0];
 
       // # Define different style
