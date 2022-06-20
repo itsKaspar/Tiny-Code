@@ -27,7 +27,9 @@ html, body{
 }
 #p5{
   /* border:3px solid cyan; */
-    border:1px dashed #cccccc;
+    border-top:1px dashed #cccccc;
+    border-bottom:1px dashed #cccccc;
+    border-right:1px dashed #cccccc;
 }
 
 #editor, #p5{
