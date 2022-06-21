@@ -1,0 +1,14 @@
+#editor{
+  height:100%;
+  width:50%;
+  left:0%;
+  top:0%;
+}
+
+#p5{
+  left:50%;
+  top:0;
+  height:100%;
+  width:50%;
+  border-left:none;
+}

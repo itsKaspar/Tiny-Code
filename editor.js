@@ -62,41 +62,30 @@ class TinyCode{
   }
 
   setLayout(){
-      const pageStyle = document.getElementsByTagName("style")[0];
+      const link = document.getElementById("layout");
 
       // # Define different style
-      let cssTop = `#editor{ width:100%;height:50%; }         #p5{ top:50%;border:0;width:100%;height:50%; }`;
-      let cssBot = `#editor{ width:100%;height:50%;top:50%; } #p5{ top:0%;border:0;width:100%;height:50%; } `;
-      let cssLeft = `#editor{ height:100%;width:50%;left:0%;top:0%;} #p5{ left:50%;top:0;height:100%;width:50%; }`;
-      let cssRight = `#editor{ height:100%;width:50%;left:50%;top:0%;} #p5{ left:0%;top:0;height:100%;width:50%; }`;
-      let cssCode = `#editor{width:100%;height:100%;}#p5 {display:none;}`;
-      let cssVisual = `#editor {display:none;}#p5{ left:0%;top:0;height:100%;width:100%; }`;
-      let cssOverlay = `#editor {width:100%;height:100%;top0;left:0} #p5 {width:100%;height:100%;top0;left:0}`;
-
 
       switch(this.layout){
-        case "top":    pageStyle.innerHTML += cssTop; break;
-        case "bot":    pageStyle.innerHTML += cssBot; break;
-        case "left":   pageStyle.innerHTML += cssLeft; break;
-        case "right":  pageStyle.innerHTML += cssRight; break;
-        case "code":   pageStyle.innerHTML += cssCode; break;
-        case "visual": pageStyle.innerHTML += cssVisual; break;
-        case "overlay":pageStyle.innerHTML += cssOverlay; break;
-        default :      pageStyle.innerHTML += cssLeft; break;
+        case "top":    link.setAttribute("href", "./css/layout-top.css"); break;
+        case "bot":    link.setAttribute("href", "./css/layout-bottom.css"); break;
+        case "left":   link.setAttribute("href", "./css/layout-left.css"); break;
+        case "right":  link.setAttribute("href", "./css/layout-right.css"); break;
+        case "code":   link.setAttribute("href", "./css/layout-code.css"); break;
+        case "visual": link.setAttribute("href", "./css/layout-visual.css"); break;
+        case "overlay":link.setAttribute("href", "./css/layout-overlay.css"); break;
+        default :      link.setAttribute("href", "./css/layout-left.css"); break;
       }
-
-      let css2 = `.cm-editor{
-        background-color:red;
-      }`;
-      pageStyle.innerHTML += css2;
   }
 
 
   createIframe(code){
+
         let iframe = document.createElement('iframe');
-        iframe.setAttribute("id", "p5") // set its id to p5
+        iframe.setAttribute("id", "p5")
         iframe.setAttribute("scrolling", "no");
-        document.body.appendChild(iframe);
+        let visual = document.querySelector("#visual");
+        visual.appendChild(iframe);
         let html =  `<!DOCTYPE html>
                       <html>
                         <head>
