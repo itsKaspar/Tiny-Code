@@ -30199,7 +30199,8 @@
       const urlParams = new URLSearchParams(queryString); // get url parameters
       let code = urlParams.get('code');
       if(code){
-        return atob(code);
+        return code;
+        // return atob(code);
       }
       else {
         return false;

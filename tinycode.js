@@ -6,8 +6,7 @@ class TinyCode extends window.HTMLElement {
   }
 
   update (code, layout) {
-    //const c = btoa(code)
-    const c = code;
+    const c = btoa(code)
     this.innerHTML = `<iframe src="https://itskaspar.github.io/Tiny-Code?layout=${layout}&code=${c}"></iframe>`;
   }
 }
