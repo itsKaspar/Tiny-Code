@@ -15,6 +15,14 @@ import { defaultHighlightStyle, HighlightStyle, syntaxHighlighting } from "@code
 
 class TinyCode{
   constructor(code, layout = "side"){
+    let c = document.createElement("div")
+    c.id = "editor";
+    let v = document.createElement("div")
+    v.id = "visual"
+    document.body.appendChild(c)
+    document.body.appendChild(v)
+
+
     this.layout = this.hasLayout() || layout;
     this.setLayout(); // change/add the css of <style id="pageStyle"></style>
 
