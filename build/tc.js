@@ -30166,6 +30166,11 @@
 
   class TinyCode{
     constructor(code, layout = "side"){
+      // set layout
+      this.layout = this.hasLayout() || layout;
+      this.setLayout(); // change/add the css of <style id="pageStyle"></style>
+
+      //create divs
       let c = document.createElement("div");
       c.id = "editor";
       let v = document.createElement("div");
@@ -30173,10 +30178,7 @@
       document.body.appendChild(c);
       document.body.appendChild(v);
 
-
-      this.layout = this.hasLayout() || layout;
-      this.setLayout(); // change/add the css of <style id="pageStyle"></style>
-
+      // get code
       this.code = this.hasHashCode() || code;
       let context = this;
       this.editor = new EditorView({
