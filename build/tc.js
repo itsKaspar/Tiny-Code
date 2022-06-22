@@ -3873,6 +3873,95 @@
     this.msg = this.strm.msg;
   };
 
+
+  /**
+   * deflate(data[, options]) -> Uint8Array
+   * - data (Uint8Array|String): input data to compress.
+   * - options (Object): zlib deflate options.
+   *
+   * Compress `data` with deflate algorithm and `options`.
+   *
+   * Supported options are:
+   *
+   * - level
+   * - windowBits
+   * - memLevel
+   * - strategy
+   * - dictionary
+   *
+   * [http://zlib.net/manual.html#Advanced](http://zlib.net/manual.html#Advanced)
+   * for more information on these.
+   *
+   * Sugar (options):
+   *
+   * - `raw` (Boolean) - say that we work with raw stream, if you don't wish to specify
+   *   negative windowBits implicitly.
+   *
+   * ##### Example:
+   *
+   * ```javascript
+   * const pako = require('pako')
+   * const data = new Uint8Array([1,2,3,4,5,6,7,8,9]);
+   *
+   * console.log(pako.deflate(data));
+   * ```
+   **/
+  function deflate$1(input, options) {
+    const deflator = new Deflate$1(options);
+
+    deflator.push(input, true);
+
+    // That will never happens, if you don't cheat with options :)
+    if (deflator.err) { throw deflator.msg || messages[deflator.err]; }
+
+    return deflator.result;
+  }
+
+
+  /**
+   * deflateRaw(data[, options]) -> Uint8Array
+   * - data (Uint8Array|String): input data to compress.
+   * - options (Object): zlib deflate options.
+   *
+   * The same as [[deflate]], but creates raw data, without wrapper
+   * (header and adler32 crc).
+   **/
+  function deflateRaw$1(input, options) {
+    options = options || {};
+    options.raw = true;
+    return deflate$1(input, options);
+  }
+
+
+  /**
+   * gzip(data[, options]) -> Uint8Array
+   * - data (Uint8Array|String): input data to compress.
+   * - options (Object): zlib deflate options.
+   *
+   * The same as [[deflate]], but create gzip wrapper instead of
+   * deflate one.
+   **/
+  function gzip$1(input, options) {
+    options = options || {};
+    options.gzip = true;
+    return deflate$1(input, options);
+  }
+
+
+  var Deflate_1$1 = Deflate$1;
+  var deflate_2 = deflate$1;
+  var deflateRaw_1$1 = deflateRaw$1;
+  var gzip_1$1 = gzip$1;
+  var constants$1 = constants$2;
+
+  var deflate_1$1 = {
+  	Deflate: Deflate_1$1,
+  	deflate: deflate_2,
+  	deflateRaw: deflateRaw_1$1,
+  	gzip: gzip_1$1,
+  	constants: constants$1
+  };
+
   // (C) 1995-2013 Jean-loup Gailly and Mark Adler
   // (C) 2014-2017 Vitaly Puzrin and Andrey Tupitsin
   //
@@ -6498,6 +6587,103 @@
     this.err = status;
     this.msg = this.strm.msg;
   };
+
+
+  /**
+   * inflate(data[, options]) -> Uint8Array|String
+   * - data (Uint8Array): input data to decompress.
+   * - options (Object): zlib inflate options.
+   *
+   * Decompress `data` with inflate/ungzip and `options`. Autodetect
+   * format via wrapper header by default. That's why we don't provide
+   * separate `ungzip` method.
+   *
+   * Supported options are:
+   *
+   * - windowBits
+   *
+   * [http://zlib.net/manual.html#Advanced](http://zlib.net/manual.html#Advanced)
+   * for more information.
+   *
+   * Sugar (options):
+   *
+   * - `raw` (Boolean) - say that we work with raw stream, if you don't wish to specify
+   *   negative windowBits implicitly.
+   * - `to` (String) - if equal to 'string', then result will be converted
+   *   from utf8 to utf16 (javascript) string. When string output requested,
+   *   chunk length can differ from `chunkSize`, depending on content.
+   *
+   *
+   * ##### Example:
+   *
+   * ```javascript
+   * const pako = require('pako');
+   * const input = pako.deflate(new Uint8Array([1,2,3,4,5,6,7,8,9]));
+   * let output;
+   *
+   * try {
+   *   output = pako.inflate(input);
+   * } catch (err) {
+   *   console.log(err);
+   * }
+   * ```
+   **/
+  function inflate$1(input, options) {
+    const inflator = new Inflate$1(options);
+
+    inflator.push(input);
+
+    // That will never happens, if you don't cheat with options :)
+    if (inflator.err) throw inflator.msg || messages[inflator.err];
+
+    return inflator.result;
+  }
+
+
+  /**
+   * inflateRaw(data[, options]) -> Uint8Array|String
+   * - data (Uint8Array): input data to decompress.
+   * - options (Object): zlib inflate options.
+   *
+   * The same as [[inflate]], but creates raw data, without wrapper
+   * (header and adler32 crc).
+   **/
+  function inflateRaw$1(input, options) {
+    options = options || {};
+    options.raw = true;
+    return inflate$1(input, options);
+  }
+
+
+  /**
+   * ungzip(data[, options]) -> Uint8Array|String
+   * - data (Uint8Array): input data to decompress.
+   * - options (Object): zlib inflate options.
+   *
+   * Just shortcut to [[inflate]], because it autodetects format
+   * by header.content. Done for convenience.
+   **/
+
+
+  var Inflate_1$1 = Inflate$1;
+  var inflate_2 = inflate$1;
+  var inflateRaw_1$1 = inflateRaw$1;
+  var ungzip$1 = inflate$1;
+  var constants = constants$2;
+
+  var inflate_1$1 = {
+  	Inflate: Inflate_1$1,
+  	inflate: inflate_2,
+  	inflateRaw: inflateRaw_1$1,
+  	ungzip: ungzip$1,
+  	constants: constants
+  };
+
+  const { Deflate, deflate, deflateRaw, gzip } = deflate_1$1;
+
+  const { Inflate, inflate, inflateRaw, ungzip } = inflate_1$1;
+  var deflate_1 = deflate;
+  var inflate_1 = inflate;
 
   /**
   The data structure for documents. @nonabstract
@@ -30267,7 +30453,27 @@
           iframe.document.write(html);
           iframe.document.close();
         }
+
+        _decode (code) { return inflate_1(window.atob(code), { to: 'string' }) }
+        _encode (code) { return window.btoa(deflate_1(code, { to: 'string' })) }
   }
+
+  class TinyCodeDOM extends window.HTMLElement {
+
+    connectedCallback () {
+      const layoutAttribute = this.getAttribute("layout"); // get the layout
+      this.update(this.textContent, layoutAttribute);
+    }
+
+    update (code, layout) {
+      //const c = btoa(code)
+      const c = btoa(unescape(encodeURIComponent(code)));
+      this.innerHTML = `<iframe src="https://itskaspar.github.io/Tiny-Code?layout=${layout}&code=${c}"></iframe>`;
+    }
+  }
+  window.customElements.define('tiny-code', TinyCodeDOM);
+
+
 
 
   if(typeof window !== 'undefined') window.TinyCode = TinyCode; // would change Q to the name of the library
