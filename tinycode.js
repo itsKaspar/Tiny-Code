@@ -1,3 +1,5 @@
+const pako = require('pako');
+
 class TinyCodeDOM extends window.HTMLElement {
 
   connectedCallback () {

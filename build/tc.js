@@ -30465,7 +30465,7 @@
       this.update(this.textContent, layoutAttribute);
     }
 
-    update (code, layout) {
+    update(code, layout) {
       //const c = btoa(code)
       const c = btoa(unescape(encodeURIComponent(code)));
       this.innerHTML = `<iframe src="https://itskaspar.github.io/Tiny-Code?layout=${layout}&code=${c}"></iframe>`;
