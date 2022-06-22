@@ -30360,7 +30360,7 @@ function draw(){
 }`  ;
 
   class TinyCode{
-    constructor(code=DEFAULT_CODE, layout = "side"){
+    constructor(parent, code=DEFAULT_CODE, layout = "side"){
       console.log("constructing text editor");
       // set layout
       this.layout = this.hasLayout() || layout;
@@ -30371,9 +30371,9 @@ function draw(){
       c.id = "editor";
       let v = document.createElement("div");
       v.id = "visual";
-      let container = document.getElementById("tiny-code");
-      container.appendChild(c);
-      container.appendChild(v);
+
+      parent.appendChild(c);
+      parent.appendChild(v);
 
       // get code
       this.code = this.hasHashCode() || code;

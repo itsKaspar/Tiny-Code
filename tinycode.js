@@ -10,19 +10,10 @@ class TinyCodeDOM extends window.HTMLElement {
 
   update() {
     let code;
-    setTimeout(() => code = this.innerHTML ); // John (*)
-
-    setTimeout(() =>
-      this.innerHTML =  `
-        <script src="./build/tc.js"></script>
-        <div id="tiny-code">
-           <script>
-             let editor = new TinyCode(${code});
-           </script>
-         </div>
-       `
-    );
-
+    let editor;
+    let parent = this;
+    setTimeout(() => code = this.innerHTML );
+    setTimeout(() => editor = new TinyCode(parent, code) );
   }
 }
 window.customElements.define('tiny-code', TinyCodeDOM)
