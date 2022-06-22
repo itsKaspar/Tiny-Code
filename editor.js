@@ -24,7 +24,7 @@ function draw(){
 
 class TinyCode{
   constructor(parent, code=DEFAULT_CODE, layout = "side"){
-    console.log("constructing text editor")
+    // console.log("constructing text editor")
     // set layout
     this.layout = this.hasLayout() || layout;
     this.setLayout(); // change/add the css of <style id="pageStyle"></style>
