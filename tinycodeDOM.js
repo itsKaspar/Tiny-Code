@@ -6710,7 +6710,8 @@ class TinyCodeDOM extends window.HTMLElement {
 
   update(code, layout) {
     //const c = btoa(code)
-    const c = btoa(unescape(encodeURIComponent(code)));
+    // const c = btoa(unescape(encodeURIComponent(code)));
+    const c = btoa(pako.deflate(code, { to: 'string' }));
     this.innerHTML = `<iframe src="https://itskaspar.github.io/Tiny-Code?layout=${layout}&code=${c}"></iframe>`;
   }
 }
