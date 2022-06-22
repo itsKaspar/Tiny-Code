@@ -30471,6 +30471,26 @@ function draw(){
         _encode (code) { return window.btoa(deflate_1(code, { to: 'string' })) }
   }
 
+  // DOM ELEMENT
+
+  class TinyCodeDOM extends window.HTMLElement {
+    constructor(){
+      super();
+    }
+    connectedCallback() {
+      this.update();
+    }
+
+    update() {
+      let code;
+      let parent = this;
+      setTimeout(() => code = this.innerHTML );
+      setTimeout(() => new TinyCode(parent, code) );
+    }
+  }
+  window.customElements.define('tiny-code', TinyCodeDOM);
+
+
   if(typeof window !== 'undefined') window.TinyCode = TinyCode; // would change Q to the name of the library
   else module.exports = TinyCode; // in node would create a context
 
