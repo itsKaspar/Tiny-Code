@@ -30363,8 +30363,8 @@ function draw(){
     constructor(parent, code=DEFAULT_CODE, layout = "side"){
       // console.log("constructing text editor")
       // set layout
-      this.layout = this.hasLayout() || layout;
-      this.setLayout(); // change/add the css of <style id="pageStyle"></style>
+      // this.layout = this.hasLayout() || layout;
+      // this.setLayout(); // change/add the css of <style id="pageStyle"></style>
 
       //create divs
       let c = document.createElement("div");
@@ -30416,28 +30416,28 @@ function draw(){
       }
     }
 
-    hasLayout(){
-      const queryString = window.location.search; // get url
-      const urlParams = new URLSearchParams(queryString); // get url parameters
-      return urlParams.get('layout');
-    }
+    // hasLayout(){
+    //   const queryString = window.location.search; // get url
+    //   const urlParams = new URLSearchParams(queryString); // get url parameters
+    //   return urlParams.get('layout');
+    // }
 
-    setLayout(){
-        const link = document.getElementById("layout");
-
-        // # Define different style
-
-        switch(this.layout){
-          case "top":    link.setAttribute("href", "./css/layout-top.css"); break;
-          case "bot":    link.setAttribute("href", "./css/layout-bottom.css"); break;
-          case "left":   link.setAttribute("href", "./css/layout-left.css"); break;
-          case "right":  link.setAttribute("href", "./css/layout-right.css"); break;
-          case "code":   link.setAttribute("href", "./css/layout-code.css"); break;
-          case "visual": link.setAttribute("href", "./css/layout-visual.css"); break;
-          case "overlay":link.setAttribute("href", "./css/layout-overlay.css"); break;
-          default :      link.setAttribute("href", "./css/layout-left.css"); break;
-        }
-    }
+    // setLayout(){
+    //     const link = document.getElementById("layout");
+    //
+    //     // # Define different style
+    //
+    //     switch(this.layout){
+    //       case "top":    link.setAttribute("href", "./css/layout-top.css"); break;
+    //       case "bot":    link.setAttribute("href", "./css/layout-bottom.css"); break;
+    //       case "left":   link.setAttribute("href", "./css/layout-left.css"); break;
+    //       case "right":  link.setAttribute("href", "./css/layout-right.css"); break;
+    //       case "code":   link.setAttribute("href", "./css/layout-code.css"); break;
+    //       case "visual": link.setAttribute("href", "./css/layout-visual.css"); break;
+    //       case "overlay":link.setAttribute("href", "./css/layout-overlay.css"); break;
+    //       default :      link.setAttribute("href", "./css/layout-left.css"); break;
+    //     }
+    // }
 
 
     createIframe(code){
