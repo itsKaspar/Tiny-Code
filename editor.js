@@ -58,7 +58,8 @@ class TinyCode{
     const urlParams = new URLSearchParams(queryString); // get url parameters
     let code = urlParams.get('code');
     if(code){
-      return decodeURIComponent(escape(window.atob(code)));
+      return this._decode(code);
+      //return decodeURIComponent(escape(window.atob(code)));
       //return atob(code);
     }
     else {
