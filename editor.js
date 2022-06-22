@@ -13,8 +13,17 @@ import { javascript } from "@codemirror/lang-javascript"
 import { tags } from "@lezer/highlight"
 import { defaultHighlightStyle, HighlightStyle, syntaxHighlighting } from "@codemirror/language";
 
+const DEFAULT_CODE =
+`function setup(){
+  createCanvas(windowWidth,windowHeight);
+}
+
+function draw(){
+  background('#e5e9f0');
+}`;
+
 class TinyCode{
-  constructor(code, layout = "side"){
+  constructor(code=DEFAULT_CODE, layout = "side"){
     // set layout
     this.layout = this.hasLayout() || layout;
     this.setLayout(); // change/add the css of <style id="pageStyle"></style>
@@ -24,8 +33,9 @@ class TinyCode{
     c.id = "editor";
     let v = document.createElement("div")
     v.id = "visual"
-    document.body.appendChild(c)
-    document.body.appendChild(v)
+    let container = document.getElementById("tiny-code")
+    container.appendChild(c)
+    container.appendChild(v)
 
     // get code
     this.code = this.hasHashCode() || code;
@@ -58,7 +68,8 @@ class TinyCode{
     const urlParams = new URLSearchParams(queryString); // get url parameters
     let code = urlParams.get('code');
     if(code){
-      return this._decode(code);
+      return code;
+      // return this._decode(code);
       //return decodeURIComponent(escape(window.atob(code)));
       //return atob(code);
     }
